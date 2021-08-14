@@ -1,5 +1,6 @@
-import {useState} from 'react'
-import './App.css';
+import {useState} from 'react';
+import { Button, Input, Container } from 'semantic-ui-react';
+import Todo from './Components/Todo'
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -16,22 +17,24 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>TODO App <span style={{fontSize:"50px"}}>&#9749;</span></h1>
-      <div>
-        <form>
-          <input value={input} onChange={event => setInput(event.target.value)}/>
-          <button onClick={addTodo} type="submit">Submit</button>
-        </form>
-      </div>
+    <div>
+      <Container textAlign='center'>
+        <h1>TODO App <span style={{fontSize:"50px"}}>&#9749;</span></h1>
+        <div>
+          <form>
+            <Input value={input} onChange={event => setInput(event.target.value)}/>
+            <Button primary onClick={addTodo} type="submit" disabled={!input}>Submit</Button>
+          </form>
+        </div>
 
-      <div>
-        <ul>
-          {todos.map(todo =>(
-            <li>{todo}</li>
-          ))}
-        </ul>
-      </div>
+        <div>
+          <ul>
+            {todos.map(todo =>(
+              <Todo text={todo}/>
+            ))}
+          </ul>
+        </div>
+      </Container>
     </div>
   );
 }
