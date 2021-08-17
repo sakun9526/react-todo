@@ -14,7 +14,7 @@ function App() {
     //this code fires when app loads
     //this will give us a snapshot of the moment of the database. whenever database changes snapshot will be taken
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-      setTodos(snapshot.docs.map(doc => doc.data().todo))
+      setTodos(snapshot.docs.map(doc => ({id : doc.id ,todo : doc.data().todo})))
     })
   },[input])
 
@@ -47,7 +47,7 @@ function App() {
         <div>
           <ul>
             {todos.map(todo =>(
-              <Todo text={todo}/>
+              <Todo todo={todo}/>
             ))}
           </ul>
         </div>
